@@ -1,29 +1,4 @@
-html {
-  -webkit-font-smoothing: antialiased;
-}
 
-body {
-  background-color: #111111;
-  font-family: "Titillium Web", sans-serif;
-  margin: 0;
-  padding: 0;
-    color: white;
-}
-
-nav{
-  background-color: #222222;
-  color: #ffffff;
-  font-size: 1.25em;
-  padding: 0;
-  top: -5;
-  margin :0;
-  width: 100%;
-  position: relative;
-  text-wrap: none;
-  text-align: center;
-  
-
-}
 h2,h3{
   background-color: #222222;
   margin: 0px;
