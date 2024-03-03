@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workshop</title>
+  <link rel="icon" href="https://ik.imagekit.io/energyclub/Assets/logo.png" type="image/x-icon">
+  <meta name="description"
+    content="Energy Club is a student club of Easwari Engineering College, Chennai. We are a group of students who are passionate about energy and its applications. We are a group of students who are passionate about energy and its applications.">
+  <meta property="og:image" content="https://ik.imagekit.io/energyclub/Assets/logo.png">
+  <meta property="og:title" content="Workshop" />
+  <meta property="og:site_name" content="Energy Club" />
+  <meta property="og:type" content="website" />
+  <meta property="og:developer" content="Srivatsan Sk" />
+  <meta property="og:author" content="Srivatsan Sk" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Titillium+Web:400,700'>
+  <link rel="stylesheet" href="https://energy-club-eec.github.io/static/forms.css">
+
+
+</head>
+
+<body>
+  <h1>Workshop | Register Now</h1>
+  <center>
+    <h5 id="response-message">A TRILOGY OF EVENTS</h5>
+    {%if error%}
+    <h5 id="response-message">{{error}}</h5>
+    {%endif%}
+  </center>
+  <form class='form' action="{%url "WorkshopRegister"%}" method="post" id="form" enctype="multipart/form-data">
+{% csrf_token %}
+    <p class='field required'>
+      <label class='label' for='name'>Name of Member</label>
+      <input class='text-input' id='name' name="name" required type='text' placeholder="Enter the name of Member ">
+    </p>
+    <p class='field half required'>
+      <label class='label' for='phone'>Phone</label>
+      <input class='text-input' id='phone' name="phone" type='phone' placeholder="Enter a Valid Phone number">
+    </p>
+    <p class='field half required'>
+      <label class='label' for='email'>Email</label>
+      <input class='text-input' id='email' name="email" required type='text' placeholder="Enter your Email Address">
+    </p>
+    <p class='field half required'>
+      <label class='label' for='cname'>Name of College </label>
+      <input class='text-input' id='cname' name="clgname" required type='text' placeholder="Enter the name of college ">
+    </p>
+    <p class='field half required'>
+      <label class='label' for='reg'>Register Number</label>
+      <input class='text-input' id='reg' name="reg" required type='text' placeholder="Enter your Register Number">
+    </p>
+    <div class='field half required'>
+      <label class='label' for='options'>Year</label>
+      
+      <select class='text-input' name="year" id='year' required>
+        <option value="" selected disabled hidden>Select an Option</option>
+        <option value="1">1st</option>
+        <option value="2">2nd</option>
+        <option value="3">3rd</option>
+        <option value="4">4th</option>
+      </select>
+    </div>
+    <p class='field half required'>
+      <label class='label' for='dept'>Department</label>
+      <select class='text-input' name="dept" id='dept' required>
+        <option value="" selected disabled hidden>Select an Option</option>
+        <option value="CSE">CSE</option>
+        <option value="ECE">ECE</option>
+        <option value="CSE(AI&ML)">CSE(AI&ML)</option>
+        <option value="CSE(AI&DS)">CSE(AI&DS)</option>
+        <option value="CSE(CS)">CSE(CS)</option>
+        <option value="EEE">EEE</option>
+        <option value="MECH">MECH</option>
+        <option value="E&I">E&I</option>
+        <option value="IT">IT</option>
+        <option value="RA">RA</option>
+        <option value="CIVIL">CIVIL</option>
+        <option value="BME">BME</option>
+        <option value="AUTO">AUTO</option>
+      </select>
+    </p>
+    
+    <hr width="100%" style="opacity: 80%;margin-bottom:5px">
+    <!-- Payment -->
+   <p class='field required'>
+    <label for='memid'>ID Card</label>
+      <input class='text-input' id='memid' name="memid" required type='file' >
+   </p>
+    <p class='field required'>
+      <label class='label' for='pay'>Payment | UPI: <a href="upi://pay?pa=kt1709263@okaxis&am=120&cu=INR">krishnarajan013@oksbi</a> <a
+          href="https://ik.imagekit.io/energyclub/Assets/qr.jpg">(QR)</a></label>
+      <label for='pay'>Registeration Fee: Rs200</label>
+
+      <input class='text-input' id='pay' name="pay" required type='file' >
+    </p>
+    <p class='field half'>
+      <input type="submit" class='button' id="submit-button" value="Register"/>
+    </p>
+  </form>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.customSelect/0.5.1/jquery.customSelect.min.js'></script>
+  <script>
+    if{{error}}{
+      alert("{{error}}")};
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById('form');
+      const submitButton = document.getElementById('submit-button');
+      const responseMessage = document.getElementById('response-message');
+
+      // Function to validate email
+      function validateEmail(email) {
+        const re = /\S+@\S+\.\S+/;
+        return re.test(email);
+      }
+
+      // Function to validate phone number
+      function validatePhone(phone) {
+        const re = /^[0-9]{10}$/;
+        return re.test(phone);
+      }
+
+      // Function to validate registration number
+      function validateRegNo(regNo) {
+        const re = /^[0-9]{1,20}$/;
+        return re.test(regNo);
+      }
+
+      // Function to validate name (no special characters)
+      function validateName(name) {
+        const re = /^[a-zA-Z\s]+$/;
+        return re.test(name);
+      }
+
+      // Add event listeners for input validation
+      document.getElementById('tname').addEventListener('input', function () {
+        const tname = this.value;
+        if (!validateName(name1)) {
+          this.setCustomValidity("Team Name should not contain special characters");
+        this.reportValidity();
+        } else {
+          this.setCustomValidity("");
+        }
+      });
+      document.getElementById('name1').addEventListener('input', function () {
+        const name1 = this.value;
+        if (!validateName(name1)) {
+          this.setCustomValidity("Name should not contain special characters");
+        this.reportValidity();
+        } else {
+          this.setCustomValidity("");
+        }
+      });
+
+      document.getElementById('name2').addEventListener('input', function () {
+        const name2 = this.value;
+        if (!validateName(name2)) {
+          this.setCustomValidity("Name should not contain special characters");
+        this.reportValidity();
+        } else {
+          this.setCustomValidity("");
+        }
+      });
+
+      document.getElementById('email1').addEventListener('input', function () {
+        const email1 = this.value;
+        if (!validateEmail(email1)) {
+          this.setCustomValidity("Invalid email address");
+        this.reportValidity();
+        } else {
+          this.setCustomValidity("");
+        }
+      });
+
+      document.getElementById('email2').addEventListener('input', function () {
+        const email2 = this.value;
+        if (!validateEmail(email2)) {
+          this.setCustomValidity("Invalid email address");
+        this.reportValidity();
+        } else {
+          this.setCustomValidity("");
+        }
+      });
+
+      document.getElementById('phone1').addEventListener('input', function () {
+        const phone1 = this.value;
+        if (!validatePhone(phone1)) {
+          this.setCustomValidity("Invalid phone number");
+        this.reportValidity();
+        } else {
+          this.setCustomValidity("");
+        }
+      });
+
+      document.getElementById('phone2').addEventListener('input', function () {
+        const phone2 = this.value;
+        if (!validatePhone(phone2)) {
+          this.setCustomValidity("Invalid phone number");
+        this.reportValidity();
+        } else {
+          this.setCustomValidity("");
+        }
+      });
+
+      document.getElementById('reg1').addEventListener('input', function () {
+        const reg1 = this.value;
+        if (!validateRegNo(reg1)) {
+          this.setCustomValidity("Registration number should be less than 20 digits");
+        this.reportValidity();
+        } else {
+          this.setCustomValidity("");
+        }
+      });
+
+      document.getElementById('reg2').addEventListener('input', function () {
+        const reg2 = this.value;
+        if (!validateRegNo(reg2)) {
+          this.setCustomValidity("Registration number should be up to 20 digits");
+        this.reportValidity();
+        } else {
+          this.setCustomValidity("");
+        }
+      });
+      
+      // Add event listener for form submission
+      submitButton.addEventListener('click', async () => {
+        // Your form submission logic
+      });
+    });
+  </script>
+</body>
+
+</html>
