@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
             setDarkMode();
         }
         updateImageSource(currentTheme);
+        updateImageLogoSource(currentTheme)
     }
 
     function setDarkMode() {
@@ -55,5 +56,13 @@ document.addEventListener("DOMContentLoaded", function () {
             logoImage.src = "https://ik.imagekit.io/energyclub/Assets/logo.webp"; // Change to the light theme image
         }
     }
+    function updateImageLogoSource(currentTheme) {
+        const logoImage = document.getElementById("ani_tech");
 
+        if (currentTheme === "dark") {
+            logoImage.src = "technostav_d.webp"; // Change to the dark theme image
+        } else {
+            logoImage.src = "technostav.webp"; // Change to the light theme image
+        }
+    }
 })
