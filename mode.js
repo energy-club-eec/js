@@ -55,5 +55,5 @@ document.addEventListener("DOMContentLoaded", function () {
             logoImage.src = "https://ik.imagekit.io/energyclub/Assets/logo.webp"; // Change to the light theme image
         }
     }
-  
+
 })
